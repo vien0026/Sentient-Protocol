@@ -22,7 +22,6 @@ namespace AGameFramework
         EntityManager entityManager = new EntityManager();
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-       
      
         public Game1()
         {

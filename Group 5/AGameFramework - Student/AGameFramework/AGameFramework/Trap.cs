@@ -16,7 +16,8 @@ namespace AGameFramework
     public class Trap : TrapSocket
     {
         public uint Money; //**Temporary variable** represent the total cash the player currently has        
-        public float playerPosX; //**Temporary variable** Where is the player is currently on the X axis (if we have more than one trap with the same X axis, we require to make a Y axis check too)
+        public float playerPosX; //**Temporary variable** Where is the player currently on the X axis (if we have more than one trap with the same X axis, we require to make a Y axis check too)
+        public float enemyPosX;//**Temporary variable** Where is the enemy  currently on the X axis (if we have more than one trap with the same X axis, we require to make a Y axis check too)
 
         #region Fields
 
@@ -125,11 +126,18 @@ namespace AGameFramework
 
         }
 
+        public virtual void attack(float enemyPosX)
+        {
+            for (int i = 0; i < trapList.Count(); i++)
+            {
+                if (enemyPosX >= trapList[i].m_TrapPos.X && enemyPosX <= trapList[i].m_TrapPos.X + trapSocketWidth && m_IsTrapRdy==true) //This check if an enemy is standing on a actif trap
+                {
+                //TODO:: add what will happen to any enemy landing on your trap here(in your override function)
+                }
+            }
+        }
 
-
-
-
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
 
         }

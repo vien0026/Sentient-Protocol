@@ -82,7 +82,7 @@ namespace AGameFramework
             }
 
 
-            if (Money >= m_Cost) //Checking if the user has enouh money to buy
+            if (Money >= trapList.Last<Trap>().m_Cost) //Checking if the user has enouh money to buy ** WE need to make sure this is the good price for the trap**
             {
                 trapList.Add(trap); //if the user has enough money, adding the trap to the list
                 trapList.Last<Trap>().m_TrapPos.X = trapSockets[selectedTrap].trapSocketPos.X;    //Takes the one that was lastly added and give it a X and Y coordinate according to which trapsocket was selected

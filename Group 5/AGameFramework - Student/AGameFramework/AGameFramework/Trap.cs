@@ -73,6 +73,7 @@ namespace AGameFramework
                 if (playerPosX >= trapSockets[i].trapSocketPos.X && playerPosX <= trapSockets[i].trapSocketPos.X + trapSocketWidth && isTrapSet == false) //This check if we are currently standing on a trap socket and also which one we are standing on.  We check if we stand between the trap socket due to the vector2 trapSocketPos.X and on the other side with the lenght of the trap.
                 {
                     selectedTrap = i;   //this int is simply to keep on storing i for the next if check because we still need it
+                    trapList.Add(trap); //if the user has enough money, adding the trap to the list But if not, the trap will be removed *The reason why it's there it's because we need to know how much it cost for the next if
                     break;  //we leave the if statement and loop because the player is correctly standing on a trapSocket
                 }
                 else
@@ -84,16 +85,16 @@ namespace AGameFramework
 
             if (Money >= trapList.Last<Trap>().m_Cost) //Checking if the user has enouh money to buy ** WE need to make sure this is the good price for the trap**
             {
-                trapList.Add(trap); //if the user has enough money, adding the trap to the list
-                trapList.Last<Trap>().m_TrapPos.X = trapSockets[selectedTrap].trapSocketPos.X;    //Takes the one that was lastly added and give it a X and Y coordinate according to which trapsocket was selected
+               
                 trapList.Last<Trap>().m_TrapPos.Y = trapSockets[selectedTrap].trapSocketPos.Y;
 
                 trapSockets[selectedTrap].isTrapSet = true;     //flag a bool to indicate a trap has been set and cannot be replaced until user sell the trap holding that spot
-                Money = Money - trap.m_Cost;                       //taking out the amount due
+                Money = Money - trapList.Last<Trap>().m_Cost;                       //taking out the amount due
                 return trap + " Was Placed Successfully";
             }
             else                            //If the user does not have enough money
             {
+                trapList.Remove(trap);      //If he could not afford the trap, take it out
                 return "Not enough money";
             }
         }
